@@ -35,20 +35,26 @@ public class Controller extends HttpServlet {
             List<Item> items = initDataRow(30);
             List<Supplier> sups = initDataCol(20);
             // change to test.xls for xls sample
-            this.downloadExcel(response, "test.xlsx", "test.xlsx", w -> {
+            this.downloadExcel(response, "test.xls", "test.xls", w -> {
                 Sheet sheet = w.getSheetAt(0);
-                // copy down row
+                // set value by cell name in a sheet
+                FileUtil.cell(sheet, "title").setCellValue("This is the header");
+
+                // copy down a range by name
                 FileUtil.verticalCopyInsertRange(sheet, "row", 0, (range, item) -> {
+                    // set value by cell name each range "row"
                     range.cell("itemRef").setCellValue(item.getItemRef());
                     range.cell("desc").setCellValue(item.getDesc());
                     range.cell("quantity").setCellValue(item.getQuatity());
                 }, items);
-                // copy to the right
+
+                // copy to the right a range by name
                 FileUtil.horizontalCopyRange(sheet, "col", 0, (range, sup) -> {
+                    // set value by cell name each range "col"
                     range.cell("unitPrice").setCellValue(sup.getUnitPrice());
                     range.cell("totalAmount").setCellValue(sup.getTotalAmount());
                     range.cell("offer").setCellValue(sup.getOffer());
-                    range.cell("sampleSubmited").setCellValue(sup.getSampleSubmited());
+                    range.cell("sampleSubmitted").setCellValue(sup.getSampleSubmited());
                     range.cell("remarks").setCellValue(sup.getRemarks());
                 }, sups);
             });
