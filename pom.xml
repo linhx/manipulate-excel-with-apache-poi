@@ -5,7 +5,7 @@
     <artifactId>excel</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Apache POI implementation (excel)</name>
+    <name>Manipulate excel</name>
     <url>http://maven.apache.org</url>
     <properties>
         <failOnMissingWebXml>false</failOnMissingWebXml>
